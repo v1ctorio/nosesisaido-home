@@ -26,7 +26,7 @@ exec_always --no-startup-id /usr/lib/polkit-kde-authentication-agent-1
 exec --no-startup-id /usr/lib/pam_kwallet_init
 exec 1password --silent
 exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
-
+exec /home/vic/.config/sway/weather.sh
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
@@ -98,6 +98,8 @@ default_border pixel
 
     # Exit sway (logs you out of your Wayland session)
     bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
+
+
 #
 # Moving around:
 #
@@ -233,12 +235,15 @@ bar {
 
     # When the status_command prints a new line to stdout, swaybar updates.
     # The default just shows the current date and time.
-    status_command while date +'%Y-%m-%d %X'; do sleep 1; done
+    #
+    status_command ~/.config/sway/bar.sh
 
     colors {
         statusline #ffffff
-        background #323232
-        inactive_workspace #32323200 #32323200 #5c5c5c
+        # background #323232
+        background #ffffff00
+            inactive_workspace #32323200 #32323200 #323232ff
+                 #5c5c5c
     }
 }
 
